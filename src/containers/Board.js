@@ -38,25 +38,15 @@ class Board extends Component {
 
     onDrop = (e, laneId) => {
         const id = e.dataTransfer.getData('id');
-        console.log(id, laneId);
-        const tickets = [...this.state.tickets];
-        const ticketToChangeIndex = tickets.findIndex(ticket => ticket.id == id);
-        tickets[ticketToChangeIndex].lane = laneId;
-        this.setState({ tickets: tickets });
-        // const tickets = this.state.tickets.filter(ticket => {
-        //     if (ticket.id === id) {
-        //         console.log(id);
-        //         ticket.lane = laneId;
-        //     }
-        //     console.log(ticket);
-            
-        //     return ticket;
-        // });
-        // console.log(tickets);
-        
-        // this.setState({
-        //     tickets: tickets
-        // });
+        const tickets = this.state.tickets.filter(ticket => {
+            if (ticket.id == id) {
+                ticket.lane = laneId;
+            }
+            return ticket;
+        });
+        this.setState({
+            tickets: tickets
+        });
     }
 
     render() {
